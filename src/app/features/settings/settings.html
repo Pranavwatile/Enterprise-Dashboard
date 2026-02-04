@@ -1,0 +1,19 @@
+<h1>SETTINGS</h1>
+
+<form [formGroup]="settingsForm">
+    <label>
+        FULL NAME
+        <input type="text" formControlName="fullName">
+    </label>
+
+    <br>
+
+    <label >
+        Email <input type="text" formControlName="email">
+    </label>
+    
+    <button (click)="save()">
+        SAVE SETTINGS
+    </button>
+</form>
+<pre>{{ settingsForm.value }}</pre>
