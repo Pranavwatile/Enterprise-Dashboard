@@ -13,7 +13,8 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                component: Dashboard
+                loadChildren:() => 
+                    import('./shared/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
 
             }
         ]

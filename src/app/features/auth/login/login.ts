@@ -13,7 +13,7 @@ export class LoginComponent {
   constructor( private auth: AuthService, private router: Router){}
 
   login(){
-    this.auth.login('admin', 'admin');
+    this.auth.login();
     this.router.navigate(['/dashboard']);
   }
 }
