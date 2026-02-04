@@ -1,26 +1,33 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
+
+const AUTH_KEY = 'isLoggedIn';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  private readonly _isLoggedIn = signal(false);
+  private readonly _isLoggedIn = signal<boolean>(
+    localStorage.getItem(AUTH_KEY) === 'true'
 
-  isLoggedIn = this._isLoggedIn.asReadonly();
+  )
 
-  login(username : string, password: string): boolean {
-    if(username && password){
-      this._isLoggedIn.set(true);
-      return true;
-    }
-    else{
-      return false;
-    }
+  isAuthenticated = this._isLoggedIn.asReadonly();
+
+  constructor(){
+    effect(() => {
+      localStorage.setItem(AUTH_KEY, String(this._isLoggedIn()));
+    });
   }
 
-  logout():void {
-    this._isLoggedIn.set(false);
-  }
+ login(){
+
+  this._isLoggedIn.set(true);
+
+ }
+
+ logout(){
+  this._isLoggedIn.set(false);
+ }
   
 }

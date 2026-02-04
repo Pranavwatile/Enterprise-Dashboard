@@ -1,1 +1,15 @@
-<a [routerLink]="['/settings']">Settings</a>
+<header style="display:flex; justify-content:space-between; border-bottom: 1px solid black; padding: 12px solid #ccc" >
+    <strong>
+        ENTERPRISE DASHBOARD
+    </strong>
+    
+    @if(auth.isAuthenticated()){
+        <button (click)="logout()">
+            Logout
+        </button>
+    }@else {
+        <span style="color:grey">
+            Not Logged In
+        </span>
+    }
+</header>
