@@ -1,15 +1,19 @@
-<header style="display:flex; justify-content:space-between; border-bottom: 1px solid black; padding: 12px solid #ccc" >
-    <strong>
-        ENTERPRISE DASHBOARD
-    </strong>
-    
-    @if(auth.isAuthenticated()){
+<nav>
+  <a routerLink="/dashboard">Dashboard</a> <br>
+  <a routerLink="/reports">Reports</a> <br>
+  <a routerLink="/settings">Settings</a>
+
+  <span style="margin-left: 20px"></span>
+    <div style="margin-top: 4px; background-color: lightgreen; display:block; position: fixed; flex-direction: column;">
+    @if(isLoggedIn()){
+        <span>
+            Hi, {{ profile()?.name}}
+        </span>
         <button (click)="logout()">
             Logout
         </button>
     }@else {
-        <span style="color:grey">
-            Not Logged In
-        </span>
+      <a routerLink="/auth/login">Login</a>
     }
-</header>
+    </div>
+</nav>
