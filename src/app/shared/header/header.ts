@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { AuthService } from '../../core/auth/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { profileSignal } from '../../features/settings/setting.store';
 
 @Component({
   selector: 'app-header',
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
+  standalone:true
 })
 export class Header {
 
-  constructor(
-    public auth:AuthService,
-    public router : Router
-  ){}
+ profile = profileSignal;
+ isLoggedIn = computed(()=> !!this.profile());
 
-  logout(){
-    this.auth.logout();
-    this.router.navigate(['/auth/login']);
-  }
+ logout(){
+  localStorage.removeItem('profile');
+  this.profile.set(null);
+ }
 }
