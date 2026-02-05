@@ -1,26 +1,28 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
   standalone: true,
 })
 export class Settings {
 
-settingsForm;
+  private fb = new FormBuilder();
 
-  constructor(private fb: FormBuilder) {
-    this.settingsForm = this.fb.group({
-      fullName: [''],
-      email: ['']
-    })
-  }
+  profileForm = this.fb.group(
+    {
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    }
+  );
+  
 
   save() {
-    console.log("SAVE CLICKED", this.settingsForm.value);
+    console.log("SAVE CLICKED", this.profileForm.value);
   }
 
 }

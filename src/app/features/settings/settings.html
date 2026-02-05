@@ -1,9 +1,9 @@
 <h1>SETTINGS</h1>
 
-<form [formGroup]="settingsForm">
+<form [formGroup]="profileForm" (ngSubmit)="save()">
     <label>
         FULL NAME
-        <input type="text" formControlName="fullName">
+        <input type="text" formControlName="name">
     </label>
 
     <br>
@@ -12,8 +12,8 @@
         Email <input type="text" formControlName="email">
     </label>
     
-    <button (click)="save()">
+    <button type="submit" [disabled]="profileForm.invalid">
+
         SAVE SETTINGS
     </button>
 </form>
-<pre>{{ settingsForm.value }}</pre>
